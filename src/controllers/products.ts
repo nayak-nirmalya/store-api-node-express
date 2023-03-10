@@ -14,7 +14,16 @@ const getAllProducts = async (
   req: Request<Partial<ProductType>>,
   res: Response<{ products: ProductType[]; nbHits: number }>
 ) => {
-  const { featured, company, name, rating, price, sort, fields } = req.query;
+  const {
+    featured,
+    company,
+    name,
+    rating,
+    price,
+    sort,
+    fields,
+    numericFilters
+  } = req.query;
   const queryObject: Partial<ProductType> = {};
 
   if (featured) {
@@ -32,6 +41,30 @@ const getAllProducts = async (
 
   if (name) {
     queryObject.name = { $regex: name, $options: "i" } as unknown as string;
+  }
+
+  // numeric filters
+  if (numericFilters) {
+    const operatorMap = {
+      ">": "$gt",
+      ">=": "$gte",
+      "=": "$eq",
+      "<": "$lt",
+      "<=": "$lte"
+    };
+    const regEx = /\b(<|>|>=|=|<|<=)\b/g;
+    let filters = (numericFilters as string).replace(
+      regEx,
+      (match) => `-${operatorMap[match]}-`
+    );
+    const options = ["price", "rating"];
+    filters.split(",").forEach((item) => {
+      const [field, operator, value] = item.split("-");
+      if (options.includes(field)) {
+        queryObject[field] = { [operator]: Number(value) };
+      }
+    });
+    console.log(numericFilters, filters, queryObject);
   }
 
   let result = Product.find(queryObject);
