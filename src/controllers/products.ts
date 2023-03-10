@@ -30,6 +30,10 @@ const getAllProducts = async (
     queryObject.company = <"ikea" | "liddy" | "caressa" | "marcos">company;
   }
 
+  if (name) {
+    queryObject.name = { $regex: name, $options: "i" } as unknown as string;
+  }
+
   console.log(queryObject);
 
   const products = await Product.find(queryObject);
