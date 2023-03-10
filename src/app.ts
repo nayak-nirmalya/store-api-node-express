@@ -1,14 +1,12 @@
 import "dotenv/config";
 
 import express from "express";
+import "express-async-errors";
 
 import errorHandlerMiddleware from "./middleware/error-handler.js";
 import notFoundMiddleware from "./middleware/not-found.js";
 import connectDB from "./db/connect.js";
-import {
-  getAllProductsStatic,
-  getAllProducts
-} from "./controllers/products.js";
+import { productsRouter } from "./routes/products.js";
 
 const app = express();
 
@@ -20,7 +18,7 @@ app.get("/", (req, res) => {
   res.send("<h1>Hello!</h1> <a href='/api/v1/products'>Products</a>");
 });
 
-app.use("/api/v1/products");
+app.use("/api/v1/products", productsRouter);
 
 // products route
 
