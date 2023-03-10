@@ -5,6 +5,10 @@ import express from "express";
 import errorHandlerMiddleware from "./middleware/error-handler.js";
 import notFoundMiddleware from "./middleware/not-found.js";
 import connectDB from "./db/connect.js";
+import {
+  getAllProductsStatic,
+  getAllProducts
+} from "./controllers/products.js";
 
 const app = express();
 
@@ -15,6 +19,8 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.send("<h1>Hello!</h1> <a href='/api/v1/products'>Products</a>");
 });
+
+app.use("/api/v1/products");
 
 // products route
 
