@@ -3,6 +3,14 @@ Technoloy Used: Node, Express, MongoDB, Mongoose, JavaScript, TypeScript and Nod
 
 ## Running Project
 
+first run this in the root folder to delete and populate DB with data
+
+```bash
+npm run populate
+        OR
+node --experimental-json-modules --loader ts-node/esm ./src/populate.ts
+```
+
 cd into root folder of project and then start express server:
 
 ```bash

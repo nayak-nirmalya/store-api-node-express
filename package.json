@@ -5,6 +5,7 @@
   "main": "app.ts",
   "type": "module",
   "scripts": {
+    "populate": "node --experimental-json-modules --loader ts-node/esm ./src/populate.ts",
     "start:prod": "npm run build && node ./dist/src/app.js",
     "start": "node --loader ts-node/esm ./src/app.ts",
     "start:nodemon": "nodemon",
