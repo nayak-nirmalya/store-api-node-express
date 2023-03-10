@@ -1,7 +1,7 @@
 import Product from "../models/product.js";
-import product, { Product as ProductType } from "src/models/product.js";
+import { Product as ProductType } from "src/models/product.js";
 
-import { query, Request, Response } from "express";
+import { Request, Response } from "express";
 
 const getAllProductsStatic = async (req: Request, res: Response) => {
   const products = await Product.find({});

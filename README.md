@@ -1,4 +1,4 @@
-Its a Basic Web App, that performs CRUD operations.
+Its a Basic Web App, that performs CRUD operations, pagination, sorting, filtering fields and numeric filters.
 Technoloy Used: Node, Express, MongoDB, Mongoose, JavaScript, TypeScript and Nodemon.
 
 ## Running Project
