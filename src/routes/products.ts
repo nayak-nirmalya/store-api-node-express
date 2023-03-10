@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { Product } from "src/models/product.js";
 
 import {
   getAllProductsStatic,
@@ -8,6 +9,8 @@ import {
 const router = Router();
 
 router.route("/").get(getAllProducts);
-router.route("/static").get(getAllProductsStatic);
+router
+  .route("/static")
+  .get<{}, { products: Product[] }, {}>(getAllProductsStatic);
 
 export { router as productsRouter };

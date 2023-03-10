@@ -30,4 +30,13 @@ const ProductSchema = new mongoose.Schema({
   }
 });
 
+export interface Product {
+  name: string;
+  price: number;
+  featured: boolean;
+  rating: number;
+  createdAt: Date;
+  company: "ikea" | "liddy" | "caressa" | "marcos";
+}
+
 export default mongoose.model("Product", ProductSchema);
