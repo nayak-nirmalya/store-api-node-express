@@ -8,7 +8,11 @@ import {
 
 const router = Router();
 
-router.route("/").get(getAllProducts);
+router
+  .route("/")
+  .get<{}, { products: Product[]; nbHits: number }, {}, Partial<Product>>(
+    getAllProducts
+  );
 router
   .route("/static")
   .get<{}, { products: Product[] }, {}>(getAllProductsStatic);
