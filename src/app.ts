@@ -4,8 +4,7 @@ import express from "express";
 
 import errorHandlerMiddleware from "./middleware/error-handler.js";
 import notFoundMiddleware from "./middleware/not-found.js";
-
-// console.log(process.env.MONGO_URI);
+import connectDB from "./db/connect.js";
 
 const app = express();
 
@@ -26,7 +25,7 @@ const PORT = process.env.PORT || 3000;
 
 const start = async () => {
   try {
-    // connect DB
+    await connectDB(process.env.MONGO_URI);
     app.listen(PORT, () => console.log(`Server is Running on PORT: ${PORT}`));
   } catch (error) {
     console.error(error);
